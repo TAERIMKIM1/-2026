@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>잊지 않고 새기는 이름들 — 확인 퀴즈</title>
+<style>
+  :root {
+    --bg: #f6f8f7; --bg-card: #ffffff; --bg-soft: #eef2f1;
+    --text: #1f2a2e; --text-muted: #6b7680;
+    --accent: #2f7d74; --accent-strong: #1f5e57; --accent-soft: #e3f1ee;
+    --line: #dfe6e4; --danger: #c0524a;
+    --shadow: 0 1px 2px rgba(20,30,28,.05), 0 10px 28px rgba(20,30,28,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1416; --bg-card: #171f22; --bg-soft: #1d2629;
+      --text: #e7edee; --text-muted: #8a9aa0;
+      --accent: #4fb3a6; --accent-strong: #7fcabf; --accent-soft: rgba(79,179,166,.14);
+      --line: #263133; --danger: #d97066;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 24px 20px 60px; width: 100%; flex: 1; }
+
+  header.top {
+    text-align: center; padding: 30px 20px 20px; border-bottom: 1px solid var(--line);
+    background: var(--bg-card);
+  }
+  header.top .eyebrow {
+    font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 8px;
+  }
+  header.top h1 { font-size: clamp(19px, 4.6vw, 24px); margin: 0; font-weight: 800; letter-spacing: -.01em; }
+
+  .setup-banner {
+    max-width: 560px; margin: 20px auto 0; padding: 16px 18px; border: 1px solid var(--danger);
+    border-radius: 8px; color: var(--danger); font-size: 13.5px; line-height: 1.7; background: var(--bg-card);
+  }
+
+  .progress-wrap { position: sticky; top: 0; background: var(--bg); z-index: 5; padding: 14px 20px 10px; }
+  .progress-top { max-width: 560px; margin: 0 auto 8px; display: flex; justify-content: space-between; align-items: baseline; }
+  .progress-top .step { font-size: 13px; font-weight: 700; color: var(--text); }
+  .progress-top .pct { font-size: 12px; color: var(--text-muted); }
+  .progress-track { max-width: 560px; margin: 0 auto; height: 6px; background: var(--bg-soft); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 4px; transition: width .3s ease; }
+
+  .card {
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 28px 24px; box-shadow: var(--shadow); margin-top: 20px;
+  }
+  .card p.desc { color: var(--text-muted); font-size: 14.5px; margin: 0 0 4px; }
+  .field { margin-top: 18px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+  .field input {
+    width: 100%; padding: 13px 14px; border-radius: 8px; border: 1.5px solid var(--line);
+    background: var(--bg); color: var(--text); font-size: 16px; font-family: inherit;
+  }
+  .field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+  .q-tag { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: .04em; margin-bottom: 10px; }
+  .q-text { font-size: 18px; font-weight: 700; margin-bottom: 20px; line-height: 1.5; letter-spacing: -.01em; }
+  .choices { display: grid; gap: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer;
+    transition: border-color .15s ease, background .15s ease, transform .1s ease;
+    background: var(--bg-card);
+  }
+  .choice:hover { border-color: var(--accent); }
+  .choice:active { transform: scale(.99); }
+  .choice-mark {
+    width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--line);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: transparent; transition: all .15s ease;
+  }
+  .choice.selected { border-color: var(--accent); background: var(--accent-soft); }
+  .choice.selected .choice-mark { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .choice span.txt { font-size: 15px; }
+
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+  button.ghost {
+    appearance: none; border: 1.5px solid var(--line); background: transparent; color: var(--text-muted);
+    font-weight: 600; font-size: 14px; padding: 11px 18px; border-radius: 8px; font-family: inherit; cursor: pointer;
+  }
+  button.ghost:disabled { opacity: .4; cursor: not-allowed; }
+  button.primary {
+    appearance: none; border: none; cursor: pointer;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 15px;
+    padding: 12px 26px; border-radius: 8px; font-family: inherit;
+    transition: background .15s ease, transform .1s ease;
+  }
+  button.primary:hover { background: var(--accent-strong); }
+  button.primary:disabled { opacity: .45; cursor: not-allowed; }
+  .start-row { margin-top: 22px; text-align: right; }
+
+  .result-card { text-align: center; }
+  .result-score { font-size: 56px; font-weight: 800; color: var(--accent); line-height: 1; margin: 4px 0 6px; letter-spacing: -.02em; }
+  .result-msg { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .result-sub { color: var(--text-muted); font-size: 14px; }
+  .result-name { margin-top: 18px; font-size: 13px; color: var(--text-muted); padding-top: 16px; border-top: 1px solid var(--line); }
+
+  .error-box { color: var(--danger); font-size: 13.5px; margin-top: 14px; text-align: center; }
+
+  .spinner {
+    display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4);
+    border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -3px; margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  footer { text-align: center; padding: 24px 20px; color: var(--text-muted); font-size: 11.5px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">2026 대소중학교 · 독립운동사교육 확인 퀴즈</div>
+  <h1>잊지 않고 새기는 이름들</h1>
+</header>
+
+<div id="setupBanner" class="setup-banner" style="display:none;">
+  ⚠ 선생님용 안내: 아직 WEBAPP_URL이 설정되지 않았습니다. 이 파일의 &lt;script&gt; 안에 있는
+  <code>const WEBAPP_URL = "..."</code> 줄을 실제 배포 URL로 바꿔주세요.
+</div>
+
+<div class="progress-wrap" id="progressWrap" style="display:none;">
+  <div class="progress-top"><span class="step" id="stepLabel">1 / 20</span><span class="pct" id="pctLabel">5%</span></div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="wrap">
+  <div id="introScreen">
+    <div class="card">
+      <p class="desc">전시 「잊지 않고 새기는 이름들」과 독도교육 내용을 바탕으로 한 20문항 퀴즈입니다. 학번과 이름을 입력하고 시작해 주세요.</p>
+      <div class="field">
+        <label for="studentId">학번</label>
+        <input type="text" id="studentId" inputmode="numeric" placeholder="예: 10305">
+      </div>
+      <div class="field">
+        <label for="studentName">이름</label>
+        <input type="text" id="studentName" placeholder="예: 홍길동">
+      </div>
+      <div class="start-row">
+        <button class="primary" id="startBtn">퀴즈 시작하기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quizScreen" style="display:none;">
+    <div class="card">
+      <div class="q-tag" id="qTag">Q1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="choices" id="qChoices"></div>
+      <div class="nav-row">
+        <button class="ghost" id="prevBtn">이전</button>
+        <button class="primary" id="submitBtn" style="display:none;">제출하기</button>
+      </div>
+      <div class="error-box" id="errorBox" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div id="resultScreen" style="display:none;">
+    <div class="card result-card">
+      <div class="q-tag" style="text-align:center;">RESULT</div>
+      <div class="result-score" id="resultScore">–</div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+      <div class="result-name" id="resultName"></div>
+    </div>
+  </div>
+</div>
+
+<footer>대소중학교 역사과 · 정답은 공개되지 않으며 점수만 안내됩니다.</footer>
+
+<script>
+(function () {
+  // ⚠️ 여기에 Apps Script "웹 앱으로 배포" 후 나오는 URL을 붙여넣으세요.
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxAPX8vrdjhGqDTMjdDlNWCAjR7j4I-LwuVs6JwGgpn_LJZhoCXzxtmlfY_7I9ZjLvr/exec";
+
+  const QUESTIONS = [
+    ["1910년 8월 29일, 우리나라가 일제에 국권을 완전히 빼앗긴 날을 부르는 이름은?", ["을사늑약", "경술국치", "광복절", "순국선열의 날"]],
+    ["1909년 하얼빈에서 이토 히로부미를 처단한 인물은?", ["윤봉길", "이봉창", "안중근", "나석주"]],
+    ["1932년 상하이 훙커우공원 의거를 일으킨 인물은?", ["윤봉길", "이봉창", "강우규", "박재혁"]],
+    ["1920년 봉오동전투를 승리로 이끈 독립군 사령관은?", ["김좌진", "홍범도", "지청천", "양세봉"]],
+    ["'독도의 날'은 몇 월 며칠인가?", ["8월 15일", "10월 25일", "3월 1일", "8월 29일"]],
+    ["아우내 장터 만세운동을 주도하다 서대문형무소에서 순국한 인물은?", ["권애라", "유관순", "김마리아", "남자현"]],
+    ["민족대표 33인의 대표로 3·1운동을 주도한 충북 청주 출신 천도교 지도자는?", ["한용운", "손병희", "이필주", "신채호"]],
+    ["『조선상고사』를 저술한 충북 청주 출신 역사학자는?", ["주시경", "이상재", "신채호", "안창호"]],
+    ["헤이그특사로 파견되어 을사늑약의 부당함을 세계에 알린 인물은?", ["이회영", "이상설", "김규식", "서재필"]],
+    ["전 재산을 처분해 6형제와 함께 만주로 망명, 신흥무관학교를 설립한 인물은?", ["이회영", "이상설", "안창호", "김규식"]],
+    ["'독립군의 어머니'라 불리며 손가락 혈서로 항일 의지를 밝힌 여성 독립운동가는?", ["윤희순", "남자현", "김마리아", "박차정"]],
+    ["'백마 탄 여장군'으로 불리며 조선의용군 소속으로 활동한 인물은?", ["김명시", "권기옥", "박차정", "차미리사"]],
+    ["한국 최초의 여성 비행사로 임시정부 공군 양성 계획에 참여한 인물은?", ["김란사", "나혜석", "권기옥", "최용신"]],
+    ["국내 최초의 여성 의병장으로 「안사람 의병가」를 지은 인물은?", ["윤희순", "남자현", "권애라", "김마리아"]],
+    ["농촌계몽운동에 헌신하여 소설 『상록수』의 모델이 된 여성 교육자는?", ["차미리사", "최용신", "김란사", "나혜석"]],
+    ["을미의병(1895) 당시 제천·충주·원주 일대를 이끈 의병장은?", ["유인석", "서일", "강우규", "양세봉"]],
+    ["1926년 동양척식주식회사에 폭탄을 투척한 의열단원은?", ["박재혁", "나석주", "강우규", "이봉창"]],
+    ["1900년 대한제국이 울릉도·독도(석도)를 관할 구역으로 명시하며 반포한 것은?", ["을사늑약", "대한제국 칙령 제41호", "한일병합조약", "헤이그특사 파견 훈령"]],
+    ["오산학교를 설립해 인재를 기른 인물은?", ["이승훈", "이상재", "주시경", "안창호"]],
+    ["신민회·흥사단을 조직해 교육을 통한 민족 실력양성운동을 이끈 인물은?", ["이승훈", "안창호", "서재필", "이상재"]],
+  ];
+
+  if (!WEBAPP_URL || WEBAPP_URL.indexOf("여기에") !== -1) {
+    document.getElementById("setupBanner").style.display = "block";
+  }
+
+  const introScreen = document.getElementById("introScreen");
+  const quizScreen = document.getElementById("quizScreen");
+  const resultScreen = document.getElementById("resultScreen");
+  const progressWrap = document.getElementById("progressWrap");
+  const progressFill = document.getElementById("progressFill");
+  const stepLabel = document.getElementById("stepLabel");
+  const pctLabel = document.getElementById("pctLabel");
+
+  const qTag = document.getElementById("qTag");
+  const qText = document.getElementById("qText");
+  const qChoices = document.getElementById("qChoices");
+  const prevBtn = document.getElementById("prevBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const errorBox = document.getElementById("errorBox");
+
+  const answers = new Array(QUESTIONS.length).fill(null);
+  let current = 0;
+  const ADVANCE_DELAY = 380;
+
+  function renderQuestion(i) {
+    errorBox.style.display = "none";
+    const q = QUESTIONS[i];
+    qTag.textContent = "Q" + (i + 1);
+    qText.textContent = q[0];
+    qChoices.innerHTML = "";
+
+    q[1].forEach(function (choiceText, ci) {
+      const el = document.createElement("div");
+      el.className = "choice" + (answers[i] === ci ? " selected" : "");
+      el.innerHTML = '<span class="choice-mark">✓</span><span class="txt"></span>';
+      el.querySelector(".txt").textContent = choiceText;
+      el.addEventListener("click", function () { selectChoice(i, ci); });
+      qChoices.appendChild(el);
+    });
+
+    prevBtn.disabled = (i === 0);
+    submitBtn.style.display = (i === QUESTIONS.length - 1 && answers[i] !== null) ? "inline-flex" : "none";
+
+    const step = i + 1;
+    stepLabel.textContent = step + " / " + QUESTIONS.length;
+    pctLabel.textContent = Math.round((step / QUESTIONS.length) * 100) + "%";
+    progressFill.style.width = Math.round((step / QUESTIONS.length) * 100) + "%";
+  }
+
+  function selectChoice(i, ci) {
+    answers[i] = ci;
+    renderQuestion(i);
+    if (i < QUESTIONS.length - 1) {
+      setTimeout(function () {
+        current = i + 1;
+        renderQuestion(current);
+      }, ADVANCE_DELAY);
+    }
+  }
+
+  prevBtn.addEventListener("click", function () {
+    if (current > 0) { current -= 1; renderQuestion(current); }
+  });
+
+  document.getElementById("startBtn").addEventListener("click", function () {
+    const idEl = document.getElementById("studentId");
+    const nameEl = document.getElementById("studentName");
+    if (!idEl.value.trim() || !nameEl.value.trim()) {
+      alert("학번과 이름을 모두 입력해 주세요.");
+      return;
+    }
+    introScreen.style.display = "none";
+    quizScreen.style.display = "block";
+    progressWrap.style.display = "block";
+    current = 0;
+    renderQuestion(current);
+    window.scrollTo(0, 0);
+  });
+
+  submitBtn.addEventListener("click", function () {
+    const unanswered = answers.findIndex(function (a) { return a === null; });
+    if (unanswered !== -1) {
+      current = unanswered;
+      renderQuestion(current);
+      errorBox.textContent = "Q" + (unanswered + 1) + "번 문항에 아직 답하지 않았어요.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    submitBtn.disabled = true;
+    prevBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>채점 중...';
+
+    const payload = {
+      studentId: document.getElementById("studentId").value.trim(),
+      name: document.getElementById("studentName").value.trim(),
+      answers: answers,
+    };
+
+    fetch(WEBAPP_URL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data.ok) throw new Error(data.error || "알 수 없는 오류");
+        showResult(data.score, data.total, payload.name);
+      })
+      .catch(function (err) {
+        submitBtn.disabled = false;
+        prevBtn.disabled = false;
+        submitBtn.textContent = "제출하기";
+        errorBox.textContent = "제출에 실패했어요. 인터넷 연결을 확인하고 다시 시도해 주세요. (선생님 확인용: " + err.message + ")";
+        errorBox.style.display = "block";
+      });
+  });
+
+  function showResult(score, total, name) {
+    quizScreen.style.display = "none";
+    progressWrap.style.display = "none";
+    resultScreen.style.display = "block";
+
+    document.getElementById("resultScore").textContent = score + " / " + total;
+    document.getElementById("resultName").textContent = name + "님의 결과입니다.";
+
+    let msg, sub;
+    if (score === total) { msg = "완벽해요!"; sub = "서른여섯 이름을 모두 기억했습니다."; }
+    else if (score >= total * 0.75) { msg = "훌륭해요!"; sub = "조금만 더 살펴보면 완벽할 거예요."; }
+    else if (score >= total * 0.5) { msg = "잘했어요!"; sub = "전시를 다시 한 번 둘러보면 더 잘 기억할 수 있어요."; }
+    else { msg = "다시 도전해봐요!"; sub = "전시를 천천히 둘러보고 한 번 더 풀어보세요."; }
+    document.getElementById("resultMsg").textContent = msg;
+    document.getElementById("resultSub").textContent = sub;
+  }
+})();
+</script>
+</body>
+</html>
