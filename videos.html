@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계기교육 영상자료 — 독도 및 독립운동사 교육주간</title>
+<style>
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f3efe3; --bg-card: #ffffff; --bg-band: #ece3cf;
+      --text: #201d17; --text-muted: #6b6558; --line: #ddd5c2;
+      --ember: #8a3324; --marine: #2b6b7a; --gold: #b5772a;
+      --shadow: 0 1px 2px rgba(28,26,22,.06), 0 8px 24px rgba(28,26,22,.06);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f3efe3; --bg-card: #ffffff; --bg-band: #ece3cf;
+    --text: #201d17; --text-muted: #6b6558; --line: #ddd5c2;
+    --ember: #8a3324; --marine: #2b6b7a; --gold: #b5772a;
+    --shadow: 0 1px 2px rgba(28,26,22,.06), 0 8px 24px rgba(28,26,22,.06);
+  }
+  :root {
+    --bg: #121319; --bg-card: #1a1c24; --bg-band: #0d0e13;
+    --text: #e9e4d8; --text-muted: #9a9483; --line: #2e3038;
+    --ember: #c06a4c; --marine: #4f95a3; --gold: #d99a3f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+  }
+  :root[data-theme="dark"] {
+    --bg: #121319; --bg-card: #1a1c24; --bg-band: #0d0e13;
+    --text: #e9e4d8; --text-muted: #9a9483; --line: #2e3038;
+    --ember: #c06a4c; --marine: #4f95a3; --gold: #d99a3f;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', -apple-system, sans-serif;
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Nanum Myeongjo', 'Noto Serif KR', Batang, serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .eyebrow { font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+  .back {
+    position: fixed; top: 18px; left: 20px; z-index: 20; font-size: 13px;
+    color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 5px;
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 7px 14px 7px 11px;
+    box-shadow: var(--shadow);
+  }
+  .back svg { width: 13px; height: 13px; }
+  .back:hover { color: var(--gold); }
+
+  .hero { padding: 100px 0 56px; text-align: center; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: clamp(28px, 5vw, 42px); margin: 16px 0 18px; font-weight: 700; text-wrap: balance; }
+  .hero .lede { max-width: 520px; margin: 0 auto; color: var(--text-muted); font-size: 15px; }
+
+  section.body { padding: 48px 0 0; }
+
+  .day {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 22px 0; border-bottom: 1px solid var(--line);
+  }
+  .day:last-child { border-bottom: none; }
+  .day .when { flex-shrink: 0; width: 92px; }
+  .day .when .dow { font-size: 20px; font-weight: 800; }
+  .day .when .date { font-size: 12.5px; color: var(--text-muted); }
+  .day .what { flex: 1; }
+  .day .cat {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
+  }
+  .day.dokdo .cat { background: color-mix(in srgb, var(--marine) 16%, transparent); color: var(--marine); }
+  .day.indep .cat { background: color-mix(in srgb, var(--ember) 16%, transparent); color: var(--ember); }
+  .day .title { font-size: 16px; font-weight: 600; margin-bottom: 10px; text-wrap: balance; }
+  .day .watch {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+    text-decoration: none; color: var(--bg); background: var(--text);
+    padding: 8px 14px; border-radius: 20px;
+  }
+  .day.dokdo .watch { background: var(--marine); color: #fff; }
+  .day.indep .watch { background: var(--ember); color: #fff; }
+  .day.bonus .watch { background: var(--gold); color: #fff; }
+  .day.bonus .cat { background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); }
+  .day .watch svg { width: 13px; height: 13px; }
+  .day .watch:hover { opacity: .85; }
+
+  footer { margin-top: 70px; padding: 34px 0 56px; text-align: center; color: var(--text-muted); font-size: 12.5px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>메인으로</a>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">계기교육</div>
+    <h1 class="serif">요일별<br>계기교육 영상자료</h1>
+    <p class="lede">교육주간 동안 매일 아침, 독도와 독립운동사를 주제로 한 영상을 하나씩 만나보세요.</p>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+
+    <div class="day dokdo">
+      <div class="when"><div class="dow serif">월</div><div class="date">8. 24.</div></div>
+      <div class="what">
+        <span class="cat">독도</span>
+        <div class="title">독도채널e - 제1부- 거짓말_</div>
+        <a class="watch" href="https://youtu.be/-8b2phT3Jfs" target="_blank" rel="noopener">영상 보기 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="day dokdo">
+      <div class="when"><div class="dow serif">화</div><div class="date">8. 25.</div></div>
+      <div class="what">
+        <span class="cat">독도</span>
+        <div class="title">독도채널e - 제2부- 대한제국 칙령 제41호의 날</div>
+        <a class="watch" href="https://youtu.be/I5KLKGoz36w" target="_blank" rel="noopener">영상 보기 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="day indep">
+      <div class="when"><div class="dow serif">수</div><div class="date">8. 26.</div></div>
+      <div class="what">
+        <span class="cat">독립운동사</span>
+        <div class="title">지식채널e - 독립 공신: 6형제 이야기</div>
+        <a class="watch" href="https://youtu.be/xGwaRN4deXk" target="_blank" rel="noopener">영상 보기 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="day indep">
+      <div class="when"><div class="dow serif">목</div><div class="date">8. 27.</div></div>
+      <div class="what">
+        <span class="cat">독립운동사</span>
+        <div class="title">지식채널e - (아는 건 별로 없지만) 명문가입니다</div>
+        <a class="watch" href="https://youtu.be/35i-On_tbOw" target="_blank" rel="noopener">영상 보기 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="day indep">
+      <div class="when"><div class="dow serif">금</div><div class="date">8. 28.</div></div>
+      <div class="what">
+        <span class="cat">독립운동사 · 경술국치</span>
+        <div class="title">경술년, 국권을 상실한 치욕의 날. 기억합시다</div>
+        <a class="watch" href="https://youtu.be/4siov05uAH8" target="_blank" rel="noopener">영상 보기 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="day bonus">
+      <div class="when"><div class="dow serif">＋</div><div class="date">보너스</div></div>
+      <div class="what">
+        <span class="cat">독도</span>
+        <div class="title">독도는 한국의 혼문</div>
+        <a class="watch" href="https://youtu.be/GKNV0UX3dIU" target="_blank" rel="noopener">영상 보기 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>대소중학교 역사과 · 2026 — 독도 및 독립운동사 교육주간</footer>
+
+</body>
+</html>
