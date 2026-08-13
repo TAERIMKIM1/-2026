@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>독도 캐릭터 만들기 — 활동 안내</title>
+<style>
+  :root {
+    --bg: #0b1520; --bg-card: #12202c; --bg-band: #081019;
+    --text: #e8eef2; --text-muted: #93a5b0;
+    --accent: #d99a3f; --accent-2: #4f95a3; --line: #1e2f3a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #eef4f6; --bg-card: #ffffff; --bg-band: #0d1b26;
+      --text: #16232b; --text-muted: #5b6b74;
+      --accent: #b5772a; --accent-2: #2b6b7a; --line: #d7e2e6;
+      --shadow: 0 1px 2px rgba(16,30,36,.06), 0 8px 24px rgba(16,30,36,.06);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1520; --bg-card: #12202c; --bg-band: #081019;
+    --text: #e8eef2; --text-muted: #93a5b0;
+    --accent: #d99a3f; --accent-2: #4f95a3; --line: #1e2f3a;
+  }
+  :root[data-theme="light"] {
+    --bg: #eef4f6; --bg-card: #ffffff; --bg-band: #0d1b26;
+    --text: #16232b; --text-muted: #5b6b74;
+    --accent: #b5772a; --accent-2: #2b6b7a; --line: #d7e2e6;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', -apple-system, sans-serif;
+    line-height: 1.75; -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Nanum Myeongjo', 'Noto Serif KR', Batang, serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+  .eyebrow { font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+
+  .back {
+    position: fixed; top: 18px; left: 20px; z-index: 20; font-size: 13px;
+    color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 5px;
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 7px 14px 7px 11px;
+    box-shadow: var(--shadow);
+  }
+  .back svg { width: 13px; height: 13px; }
+  .back:hover { color: var(--accent); }
+
+  .hero { padding: 100px 0 56px; text-align: center; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: clamp(28px, 5vw, 42px); margin: 16px 0 18px; font-weight: 700; text-wrap: balance; }
+  .hero .lede { max-width: 520px; margin: 0 auto; color: var(--text-muted); font-size: 15px; }
+  .hero .meta { margin-top: 26px; font-size: 13px; color: var(--text-muted); display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero .meta b { color: var(--text); }
+
+  section.body { padding: 56px 0 0; }
+  h2 { font-size: 20px; margin: 0 0 18px; font-weight: 700; }
+
+  .infogrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 8px; }
+  @media (max-width: 560px) { .infogrid { grid-template-columns: 1fr; } }
+  .info { background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; }
+  .info .k { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: .04em; margin-bottom: 6px; }
+  .info .v { font-size: 14px; }
+
+  ol.steps { padding-left: 20px; margin: 0; }
+  ol.steps li { font-size: 14.5px; margin: 10px 0; }
+  ol.steps b { color: var(--text); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 14px 0 4px; }
+  .chip {
+    font-size: 13.5px; padding: 6px 13px; border-radius: 20px;
+    border: 1px solid var(--line); background: var(--bg-card);
+  }
+
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+  @media (max-width: 620px) { .gallery { grid-template-columns: 1fr; } }
+  .ex { background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; box-shadow: var(--shadow); }
+  .ex .art { aspect-ratio: 1; background: linear-gradient(160deg, var(--bg-band), var(--bg)); display: flex; align-items: center; justify-content: center; }
+  .ex .art svg { width: 62%; height: 62%; }
+  .ex .cap { padding: 12px 14px 15px; }
+  .ex .cap .t { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .ex .cap .d { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+  .example-note {
+    font-size: 13px; color: var(--text-muted); background: var(--bg-band);
+    border-radius: 4px; padding: 12px 16px; margin: 18px 0 0; color: #cfd8db;
+  }
+  @media (prefers-color-scheme: light) { .example-note { color: #e4ecee; } }
+  :root[data-theme="light"] .example-note { color: #e4ecee; }
+
+  footer { margin-top: 80px; padding: 34px 0 56px; text-align: center; color: var(--text-muted); font-size: 12.5px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>메인으로</a>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">참여 활동 · 독도교육</div>
+    <h1 class="serif">나만의<br>독도 캐릭터 만들기</h1>
+    <p class="lede">독도의 바위, 새, 파도, 빛 — 그 안에서 나만의 캐릭터를 찾아보세요.<br>완성한 캐릭터는 학생쉼터 '기억의 나무'에 걸려 함께 전시됩니다.</p>
+    <div class="meta">
+      <span>운영 기간 · <b>2026. 8. 24. – 8. 28.</b></span>
+      <span>전시 장소 · <b>학생쉼터 '기억의 나무'</b></span>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <h2>활동 안내</h2>
+    <div class="infogrid">
+      <div class="info"><div class="k">준비물</div><div class="v">도화지(또는 8절 스케치북), 색연필·사인펜·수채물감 중 자유 선택</div></div>
+      <div class="info"><div class="k">크기</div><div class="v">8절(또는 A4) 1장 · 캐릭터 1개 이상</div></div>
+      <div class="info"><div class="k">제출</div><div class="v">완성 후 이름표를 붙여 '기억의 나무'에 직접 게시</div></div>
+      <div class="info"><div class="k">참여 보상</div><div class="v">활동 우수작 선정 시 문구세트 등 상품 증정</div></div>
+    </div>
+
+    <h2 style="margin-top:52px;">이렇게 만들어요</h2>
+    <ol class="steps">
+      <li><b>1. 독도의 모습을 살펴봅니다.</b> 온라인 전시의 독도 사진과 지도를 참고해, 동도·서도 두 바위섬의 생김새, 그 위에 사는 괭이갈매기와 식물, 등대와 경비대의 모습을 관찰합니다.</li>
+      <li><b>2. 캐릭터의 특징을 하나 정합니다.</b> 바위처럼 단단한 성격, 갈매기처럼 씩씩하게 나는 모습, 등대처럼 어둠 속에서도 자리를 지키는 모습 — 독도의 무언가를 캐릭터의 성격으로 옮겨봅니다.</li>
+      <li><b>3. 얼굴과 색을 더합니다.</b> 표정과 눈, 손발 같은 간단한 요소만 더해도 캐릭터가 됩니다. 태극기·동해 파도색·해돋이색처럼 독도를 떠올리게 하는 색을 활용해보세요.</li>
+      <li><b>4. 이름을 지어줍니다.</b> 캐릭터의 이름과 한 줄 소개를 함께 적으면 더 완성도 있는 작품이 됩니다.</li>
+    </ol>
+
+    <h2 style="margin-top:52px;">디자인 힌트 — 독도에서 가져올 수 있는 요소</h2>
+    <div class="chips">
+      <span class="chip">동도·서도 두 바위섬</span><span class="chip">괭이갈매기</span><span class="chip">등대</span>
+      <span class="chip">독도 경비대·삽살개</span><span class="chip">해돋이</span><span class="chip">동해의 파도</span>
+      <span class="chip">태극기</span><span class="chip">대한제국 칙령 제41호</span><span class="chip">우리나라 지도 속 독도</span>
+    </div>
+
+    <h2 style="margin-top:52px;">예시 도안 (선생님이 그려본 참고용)</h2>
+    <div class="gallery">
+      <div class="ex">
+        <div class="art">
+          <svg viewBox="0 0 100 100">
+            <ellipse cx="50" cy="72" rx="38" ry="8" fill="var(--accent-2)" opacity=".25"/>
+            <path d="M22 74 Q20 45 34 34 Q40 20 52 30 Q66 22 70 42 Q80 48 76 66 Q78 74 70 76 Q50 82 30 76 Q22 78 22 74Z" fill="var(--accent-2)"/>
+            <circle cx="42" cy="50" r="4.2" fill="#fff"/><circle cx="42" cy="50" r="2" fill="#16232b"/>
+            <circle cx="58" cy="50" r="4.2" fill="#fff"/><circle cx="58" cy="50" r="2" fill="#16232b"/>
+            <path d="M44 62 Q50 67 56 62" stroke="#16232b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <rect x="66" y="24" width="10" height="7" fill="#fff" opacity=".9"/>
+            <path d="M76 24 v20" stroke="#fff" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div class="cap"><div class="t">독바위</div><div class="d">동도·서도를 닮은 바위 캐릭터. 태극기를 꽂고 씩씩하게 웃고 있어요.</div></div>
+      </div>
+      <div class="ex">
+        <div class="art">
+          <svg viewBox="0 0 100 100">
+            <ellipse cx="50" cy="80" rx="34" ry="6" fill="var(--accent)" opacity=".2"/>
+            <path d="M50 30 Q20 34 14 52 Q28 50 38 58 L34 66 Q46 62 50 50 Q54 62 66 66 L62 58 Q72 50 86 52 Q80 34 50 30Z" fill="var(--accent)"/>
+            <circle cx="47" cy="42" r="3" fill="#16232b"/>
+            <path d="M50 44 L58 46 L50 48Z" fill="#c0603f"/>
+          </svg>
+        </div>
+        <div class="cap"><div class="t">괭이순이</div><div class="d">독도를 지키는 괭이갈매기. 두 날개를 활짝 펴고 하늘을 나는 모습이에요.</div></div>
+      </div>
+      <div class="ex">
+        <div class="art">
+          <svg viewBox="0 0 100 100">
+            <ellipse cx="50" cy="84" rx="30" ry="6" fill="var(--accent-2)" opacity=".2"/>
+            <rect x="42" y="46" width="16" height="34" rx="2" fill="var(--accent-2)"/>
+            <rect x="38" y="34" width="24" height="14" rx="2" fill="var(--accent-2)"/>
+            <polygon points="50,16 62,34 38,34" fill="#d99a3f"/>
+            <circle cx="45" cy="56" r="3.4" fill="#fff"/><circle cx="45" cy="56" r="1.6" fill="#16232b"/>
+            <circle cx="55" cy="56" r="3.4" fill="#fff"/><circle cx="55" cy="56" r="1.6" fill="#16232b"/>
+            <path d="M46 66 Q50 70 54 66" stroke="#0b1520" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="cap"><div class="t">등대돌이</div><div class="d">밤에도 독도의 자리를 밝히는 등대 캐릭터. 든든하고 다정한 성격이에요.</div></div>
+      </div>
+    </div>
+    <p class="example-note">위 세 캐릭터는 활동 방향을 보여드리기 위해 선생님이 간단히 그려본 참고 도안입니다. 똑같이 따라 그리지 않아도 좋아요 — 나만의 방식으로 자유롭게 표현해보세요.</p>
+  </div>
+</section>
+
+<footer>대소중학교 역사과 · 2026 — 독도 및 독립운동사 교육주간</footer>
+
+</body>
+</html>

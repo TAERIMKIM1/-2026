@@ -181,9 +181,18 @@
   }
   .bgm-toggle:hover { transform: scale(1.08); }
   .bgm-toggle:active { transform: scale(0.95); }
+  .back {
+    position: fixed; top: 18px; left: 20px; z-index: 999; font-size: 13px;
+    color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 5px;
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 7px 14px 7px 11px;
+    box-shadow: var(--shadow);
+  }
+  .back svg { width: 13px; height: 13px; }
+  .back:hover { color: var(--accent); }
 </style>
 </head>
 <body>
+<a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>메인으로</a>
 
 <audio id="bgm" loop preload="none" src="bgm.mp3"></audio>
 <button class="bgm-toggle" id="bgmToggle" aria-label="배경음악 재생" title="배경음악 재생/정지">🔇</button>

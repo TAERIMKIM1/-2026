@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>독립운동가에게 쓰는 편지 — 활동 안내</title>
+<style>
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f1ece0; --bg-card: #ffffff; --bg-band: #eee7d6;
+      --text: #1c1a16; --text-muted: #6b6558;
+      --accent: #8a6636; --line: #ddd5c2; --ember: #8a3324;
+      --shadow: 0 1px 2px rgba(28,26,22,.06), 0 8px 24px rgba(28,26,22,.05);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f1ece0; --bg-card: #ffffff; --bg-band: #eee7d6;
+    --text: #1c1a16; --text-muted: #6b6558;
+    --accent: #8a6636; --line: #ddd5c2; --ember: #8a3324;
+    --shadow: 0 1px 2px rgba(28,26,22,.06), 0 8px 24px rgba(28,26,22,.05);
+  }
+  :root {
+    --bg: #131319; --bg-card: #1c1e27; --bg-band: #0e0f13;
+    --text: #e9e2d3; --text-muted: #9a9483;
+    --accent: #c39a63; --line: #33353f; --ember: #c06a4c;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+  }
+  :root[data-theme="dark"] {
+    --bg: #131319; --bg-card: #1c1e27; --bg-band: #0e0f13;
+    --text: #e9e2d3; --text-muted: #9a9483;
+    --accent: #c39a63; --line: #33353f; --ember: #c06a4c;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', -apple-system, sans-serif;
+    line-height: 1.75; -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Nanum Myeongjo', 'Noto Serif KR', Batang, serif; }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 28px; }
+  .eyebrow { font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+
+  .back {
+    position: fixed; top: 18px; left: 20px; z-index: 20; font-size: 13px;
+    color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 5px;
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 7px 14px 7px 11px;
+    box-shadow: var(--shadow);
+  }
+  .back svg { width: 13px; height: 13px; }
+  .back:hover { color: var(--ember); }
+
+  .hero { padding: 100px 0 56px; text-align: center; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: clamp(28px, 5vw, 42px); margin: 16px 0 18px; font-weight: 700; text-wrap: balance; }
+  .hero .lede { max-width: 520px; margin: 0 auto; color: var(--text-muted); font-size: 15px; }
+  .hero .meta { margin-top: 26px; font-size: 13px; color: var(--text-muted); display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero .meta b { color: var(--text); }
+
+  section.body { padding: 56px 0 0; }
+  h2 { font-size: 20px; margin: 0 0 18px; font-weight: 700; }
+
+  .infogrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 8px; }
+  @media (max-width: 560px) { .infogrid { grid-template-columns: 1fr; } }
+  .info { background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; }
+  .info .k { font-size: 12px; color: var(--ember); font-weight: 700; letter-spacing: .04em; margin-bottom: 6px; }
+  .info .v { font-size: 14px; }
+
+  ol.steps { padding-left: 20px; margin: 0; }
+  ol.steps li { font-size: 14.5px; margin: 10px 0; }
+  ol.steps b { color: var(--text); }
+
+  .letter {
+    margin-top: 22px; background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 6px; padding: 40px 44px; box-shadow: var(--shadow); position: relative;
+  }
+  .letter::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--ember);
+    border-radius: 6px 0 0 6px;
+  }
+  .letter .to { font-size: 17px; font-weight: 700; margin-bottom: 22px; }
+  .letter p { font-size: 15px; margin: 0 0 16px; }
+  .letter .sign { text-align: right; margin-top: 26px; color: var(--text-muted); font-size: 14px; }
+  .example-note {
+    font-size: 13px; color: var(--text-muted); background: var(--bg-band);
+    border-radius: 4px; padding: 12px 16px; margin: 16px 0 0; color: #d8cfb8;
+  }
+  @media (prefers-color-scheme: light) { .example-note { color: #efe7d6; } }
+  :root[data-theme="light"] .example-note { color: #efe7d6; }
+
+  footer { margin-top: 80px; padding: 34px 0 56px; text-align: center; color: var(--text-muted); font-size: 12.5px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>메인으로</a>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">참여 활동 · 독립운동사교육</div>
+    <h1 class="serif">독립운동가에게<br>쓰는 편지</h1>
+    <p class="lede">전시 속 서른여섯 이름 중 한 분을 골라, 하고 싶었던 말을 편지에 담아보세요.<br>완성한 편지는 학생쉼터 '기억의 나무'에 함께 걸립니다.</p>
+    <div class="meta">
+      <span>운영 기간 · <b>2026. 8. 24. – 8. 28.</b></span>
+      <span>전시 장소 · <b>학생쉼터 '기억의 나무'</b></span>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <h2>활동 안내</h2>
+    <div class="infogrid">
+      <div class="info"><div class="k">준비물</div><div class="v">편지지, 필기도구</div></div>
+      <div class="info"><div class="k">분량</div><div class="v">200자 이상</div></div>
+      <div class="info"><div class="k">제출</div><div class="v">완성 후 이름을 적어 '기억의 나무'에 직접 게시</div></div>
+      <div class="info"><div class="k">참여 보상</div><div class="v">참여자에게 간식 제공</div></div>
+    </div>
+
+    <h2 style="margin-top:52px;">이렇게 써보세요</h2>
+    <ol class="steps">
+      <li><b>인물을 고릅니다.</b> 온라인 전시 속 36인 가운데 마음이 가는 한 분을 정합니다. 잘 아는 인물이어도, 이번에 처음 알게 된 인물이어도 좋습니다.</li>
+      <li><b>그분의 이야기를 다시 읽어봅니다.</b> 전시에 소개된 약력에서, 가장 인상 깊었던 순간이나 선택을 하나 찾아봅니다.</li>
+      <li><b>인사와 감사의 마음을 전합니다.</b> 그 선택 덕분에 지금 우리가 무엇을 누리고 있는지 생각하며 감사와 존경을 표현합니다.</li>
+      <li><b>오늘의 이야기를 들려줍니다.</b> 지금 내가 살아가는 하루, 학교와 친구들 이야기를 그분께 전하듯 적어봅니다.</li>
+      <li><b>다짐으로 마무리합니다.</b> 기억하겠다는 다짐, 혹은 하고 싶은 약속으로 편지를 맺고 날짜와 이름을 적습니다.</li>
+    </ol>
+
+    <h2 style="margin-top:52px;">예시 편지 (선생님이 써본 참고용)</h2>
+    <div class="letter">
+      <div class="to serif">유관순 열사님께</div>
+      <p>안녕하세요, 대소중학교 학생입니다. 열일곱의 나이로 아우내 장터에서 만세를 외치신 그 용기를 배울 때마다 마음이 먹먹해집니다. 덕분에 저는 오늘도 이 땅에서 평범한 하루를 웃으며 보냅니다. 열사님의 이름을 잊지 않고 기억하겠습니다.</p>
+      <div class="sign">2026년 8월, 대소중학교 역사과 드림</div>
+    </div>
+    <p class="example-note">위 편지는 활동 방향을 보여드리기 위해 선생님이 써본 참고 예시입니다. 형식을 그대로 따르지 않아도 좋아요 — 내가 고른 인물에게, 나만의 말투로 자유롭게 써보세요.</p>
+  </div>
+</section>
+
+<footer>대소중학교 역사과 · 2026 — 독도 및 독립운동사 교육주간</footer>
+
+</body>
+</html>
