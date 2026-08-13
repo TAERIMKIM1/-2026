@@ -169,9 +169,37 @@
   footer { text-align: center; padding: 30px 20px; color: var(--text-muted); font-size: 12px; }
 
   @media (prefers-reduced-motion: reduce) { .card { transition: none; opacity: 1; transform: none; } }
+
+  .bgm-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--bg-card); border: 1px solid var(--line);
+    color: var(--accent); font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: var(--shadow);
+    transition: transform .2s ease;
+  }
+  .bgm-toggle:hover { transform: scale(1.08); }
+  .bgm-toggle:active { transform: scale(0.95); }
 </style>
 </head>
 <body>
+
+<audio id="bgm" loop preload="none" src="bgm.mp3"></audio>
+<button class="bgm-toggle" id="bgmToggle" aria-label="배경음악 재생" title="배경음악 재생/정지">🔇</button>
+<script>
+(function () {
+  var audio = document.getElementById('bgm');
+  var btn = document.getElementById('bgmToggle');
+  var playing = false;
+  audio.volume = 0.35;
+  btn.addEventListener('click', function () {
+    if (playing) { audio.pause(); btn.textContent = '🔇'; }
+    else { audio.play().catch(function () {}); btn.textContent = '🔊'; }
+    playing = !playing;
+  });
+})();
+</script>
 
 <section class="hero">
   <div class="hero-bg" id="heroBg"></div>
@@ -226,7 +254,7 @@
   </div>
 </section>
 
-<footer>대소중학교 역사과 자체 제작 · 2026 — 독도교육 온라인 전시</footer>
+<footer>대소중학교 역사과 · 2026 — 독도교육 온라인 전시</footer>
 
 <script>
 (function () {
