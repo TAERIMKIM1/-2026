@@ -33,8 +33,15 @@
 
   header.top {
     text-align: center; padding: 30px 20px 20px; border-bottom: 1px solid var(--line);
-    background: var(--bg-card);
+    background: var(--bg-card); position: relative;
   }
+  header.top .back {
+    position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; color: var(--text-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 4px;
+  }
+  header.top .back:hover { color: var(--accent); }
+  header.top .back svg { width: 13px; height: 13px; }
   header.top .eyebrow {
     font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--accent); font-weight: 700; margin-bottom: 8px;
@@ -124,6 +131,7 @@
 <body>
 
 <header class="top">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>메인</a>
   <div class="eyebrow">2026 대소중학교 · 독립운동사교육 확인 퀴즈</div>
   <h1>잊지 않고 새기는 이름들</h1>
 </header>
