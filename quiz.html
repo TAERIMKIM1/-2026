@@ -72,6 +72,13 @@
     background: var(--bg); color: var(--text); font-size: 16px; font-family: inherit;
   }
   .field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .field textarea {
+    width: 100%; padding: 13px 14px; border-radius: 8px; border: 1.5px solid var(--line);
+    background: var(--bg); color: var(--text); font-size: 15px; font-family: inherit;
+    resize: vertical; min-height: 80px; line-height: 1.55;
+  }
+  .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .field .hint { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
 
   .q-tag { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: .04em; margin-bottom: 10px; }
   .q-text { font-size: 18px; font-weight: 700; margin-bottom: 20px; line-height: 1.5; letter-spacing: -.01em; }
@@ -171,9 +178,30 @@
       <div class="choices" id="qChoices"></div>
       <div class="nav-row">
         <button class="ghost" id="prevBtn">이전</button>
-        <button class="primary" id="submitBtn" style="display:none;">제출하기</button>
+        <button class="primary" id="submitBtn" style="display:none;">다음</button>
       </div>
       <div class="error-box" id="errorBox" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div id="essayScreen" style="display:none;">
+    <div class="card">
+      <div class="q-tag">서술형</div>
+      <div class="q-text" style="margin-bottom:6px;">두 가지만 더 답해주세요</div>
+      <p class="desc" style="margin-bottom:14px;">객관식 채점에는 포함되지 않아요. 편하게 적어주세요.</p>
+      <div class="field">
+        <label for="foundActivist">1. 온라인 전시(36인)에는 없는, 내가 직접 찾은 독립운동가 1명</label>
+        <input type="text" id="foundActivist" placeholder="예: 김구">
+      </div>
+      <div class="field">
+        <label for="messageToActivist">2. 독립운동가에게 한마디</label>
+        <textarea id="messageToActivist" placeholder="하고 싶은 말을 자유롭게 적어주세요"></textarea>
+      </div>
+      <div class="nav-row">
+        <button class="ghost" id="essayPrevBtn">이전</button>
+        <button class="primary" id="essaySubmitBtn">제출하기</button>
+      </div>
+      <div class="error-box" id="essayErrorBox" style="display:none;"></div>
     </div>
   </div>
 
@@ -224,6 +252,7 @@
 
   const introScreen = document.getElementById("introScreen");
   const quizScreen = document.getElementById("quizScreen");
+  const essayScreen = document.getElementById("essayScreen");
   const resultScreen = document.getElementById("resultScreen");
   const progressWrap = document.getElementById("progressWrap");
   const progressFill = document.getElementById("progressFill");
@@ -305,15 +334,44 @@
       errorBox.style.display = "block";
       return;
     }
+    quizScreen.style.display = "none";
+    progressWrap.style.display = "none";
+    essayScreen.style.display = "block";
+    window.scrollTo(0, 0);
+  });
 
-    submitBtn.disabled = true;
-    prevBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="spinner"></span>채점 중...';
+  const essayPrevBtn = document.getElementById("essayPrevBtn");
+  const essaySubmitBtn = document.getElementById("essaySubmitBtn");
+  const essayErrorBox = document.getElementById("essayErrorBox");
+
+  essayPrevBtn.addEventListener("click", function () {
+    essayScreen.style.display = "none";
+    quizScreen.style.display = "block";
+    progressWrap.style.display = "block";
+    current = QUESTIONS.length - 1;
+    renderQuestion(current);
+  });
+
+  essaySubmitBtn.addEventListener("click", function () {
+    const foundEl = document.getElementById("foundActivist");
+    const msgEl = document.getElementById("messageToActivist");
+    if (!foundEl.value.trim() || !msgEl.value.trim()) {
+      essayErrorBox.textContent = "두 문항 모두 답해 주세요.";
+      essayErrorBox.style.display = "block";
+      return;
+    }
+    essayErrorBox.style.display = "none";
+
+    essaySubmitBtn.disabled = true;
+    essayPrevBtn.disabled = true;
+    essaySubmitBtn.innerHTML = '<span class="spinner"></span>채점 중...';
 
     const payload = {
       studentId: document.getElementById("studentId").value.trim(),
       name: document.getElementById("studentName").value.trim(),
       answers: answers,
+      foundActivist: foundEl.value.trim(),
+      messageToActivist: msgEl.value.trim(),
     };
 
     fetch(WEBAPP_URL, {
@@ -326,16 +384,17 @@
         showResult(data.score, data.total, payload.name);
       })
       .catch(function (err) {
-        submitBtn.disabled = false;
-        prevBtn.disabled = false;
-        submitBtn.textContent = "제출하기";
-        errorBox.textContent = "제출에 실패했어요. 인터넷 연결을 확인하고 다시 시도해 주세요. (선생님 확인용: " + err.message + ")";
-        errorBox.style.display = "block";
+        essaySubmitBtn.disabled = false;
+        essayPrevBtn.disabled = false;
+        essaySubmitBtn.textContent = "제출하기";
+        essayErrorBox.textContent = "제출에 실패했어요. 인터넷 연결을 확인하고 다시 시도해 주세요. (선생님 확인용: " + err.message + ")";
+        essayErrorBox.style.display = "block";
       });
   });
 
   function showResult(score, total, name) {
     quizScreen.style.display = "none";
+    essayScreen.style.display = "none";
     progressWrap.style.display = "none";
     resultScreen.style.display = "block";
 
