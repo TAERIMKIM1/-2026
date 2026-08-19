@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ⅳ - 1. 통치 체제와 대외 정비</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        /* A4 Page Formatting for Print */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .a4-page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+                min-height: 297mm !important;
+                padding: 10mm 12mm !important;
+                page-break-after: always;
+                break-after: page;
+            }
+            .a4-page:last-child {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            input, textarea {
+                border: none !important;
+                border-bottom: 1px solid #9ca3af !important;
+                background: transparent !important;
+            }
+            .answer-text {
+                color: #2563eb !important;
+                font-weight: bold !important;
+            }
+        }
+
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 20px auto;
+            padding: 15mm 15mm;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Custom Blank Underline Box for Writing */
+        .blank-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 90px;
+            padding: 0 8px;
+            border-bottom: 1.5px solid #475569;
+            margin: 0 2px;
+            font-weight: 700;
+            color: #1e3a8a;
+            background-color: rgba(241, 245, 249, 0.6);
+            border-radius: 2px;
+        }
+        .blank-num {
+            font-size: 0.75rem;
+            color: #2563eb;
+            margin-right: 4px;
+            font-weight: 800;
+        }
+
+        .word-grid td {
+            width: 38px;
+            height: 38px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: 1.5px solid #cbd5e1;
+            transition: all 0.2s;
+        }
+        .word-grid td:hover {
+            background-color: #dbeafe;
+            cursor: pointer;
+        }
+        .word-grid td.selected {
+            background-color: #93c5fd;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body class="py-6">
+
+    <!-- Top Floating Toolbar (No Print) -->
+    <div class="no-print fixed top-4 right-4 z-50 flex gap-3 bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-xl border border-gray-200">
+        <button onclick="window.print()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl transition shadow">
+            <i class="fa-solid fa-print"></i> 학습지 인쇄 / PDF 저장
+        </button>
+        <button onclick="toggleAnswers()" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl transition shadow">
+            <i class="fa-solid fa-key"></i> <span id="ansBtnText">정답 보기</span>
+        </button>
+    </div>
+
+    <!-- PAGE 1: 건국과 국가 기틀의 확립 -->
+    <div class="a4-page rounded-lg flex flex-col justify-between">
+        <div>
+            <!-- Header Banner -->
+            <div class="border-b-4 border-blue-900 pb-3 mb-4">
+                <div class="flex justify-between items-end mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-blue-900 text-white text-xs font-black px-2.5 py-1 rounded-md tracking-wider">중3 역사</span>
+                        <span class="text-gray-500 text-sm font-bold">Ⅳ - 1. 통치 체제와 대외 정비</span>
+                    </div>
+                    <!-- Student Info Box (Clean formatting without placeholder text) -->
+                    <div class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-bold text-gray-700">
+                        <span>3학년</span>
+                        <input type="text" class="w-8 text-center bg-transparent focus:outline-none border-b border-gray-500 font-bold">
+                        <span>반</span>
+                        <input type="text" class="w-8 text-center bg-transparent focus:outline-none border-b border-gray-500 font-bold">
+                        <span>번</span>
+                        <span class="ml-2">이름:</span>
+                        <input type="text" class="w-24 text-center bg-transparent focus:outline-none border-b border-gray-500 font-bold text-blue-900">
+                    </div>
+                </div>
+                <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-scroll text-blue-700"></i>
+                    <span>Ⅳ - 1. 통치 체제와 대외 정비</span>
+                </h1>
+            </div>
+
+            <!-- Learning Objectives Box -->
+            <div class="bg-blue-50/80 border-l-4 border-blue-600 p-3 rounded-r-xl mb-4 text-xs">
+                <div class="font-bold text-blue-900 mb-1 flex items-center gap-1.5">
+                    <i class="fa-solid fa-bullseye text-blue-600"></i> 오늘의 학습 목표
+                </div>
+                <ul class="list-disc list-inside text-gray-700 space-y-0.5">
+                    <li>조선의 건국 과정과 성리학적 통치 이념의 확립 과정을 설명할 수 있다.</li>
+                    <li>태종, 세종, 세조, 성종의 주요 정책과 통치 체제 정비 과정을 비교·설명할 수 있다.</li>
+                </ul>
+            </div>
+
+            <!-- SECTION 1: 조선의 건국 과정 -->
+            <div class="mb-5">
+                <h2 class="text-base font-bold text-gray-900 mb-2.5 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-black">1</span>
+                    조선의 건국 과정 및 통치 이념
+                </h2>
+
+                <!-- Visual Flowchart -->
+                <div class="bg-gradient-to-r from-slate-50 to-blue-50/30 p-3.5 rounded-xl border border-slate-200 mb-3">
+                    <div class="text-xs font-bold text-blue-900 mb-2 flex items-center gap-1">
+                        <i class="fa-solid fa-route"></i> 건국 단계별 주요 사건
+                    </div>
+                    <div class="grid grid-cols-5 gap-2 text-center text-xs">
+                        <div class="bg-white p-2.5 rounded-lg border border-blue-200 shadow-sm flex flex-col justify-between">
+                            <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-1.5 py-0.5 rounded mb-1">1388년</span>
+                            <div class="font-bold text-gray-800">위화도 회군</div>
+                            <div class="text-[10px] text-gray-500 mt-1">이성계의 군사권 장악</div>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-lg border border-blue-200 shadow-sm flex flex-col justify-between">
+                            <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-1.5 py-0.5 rounded mb-1">1391년</span>
+                            <div class="font-bold text-blue-900 my-1">
+                                <span class="blank-box min-w-[80px]"><span class="blank-num">①</span><span class="answer-text hidden">과전법</span></span> 시행
+                            </div>
+                            <div class="text-[10px] text-gray-500">신진사대부 경제 기반</div>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-lg border border-blue-200 shadow-sm flex flex-col justify-between">
+                            <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-1.5 py-0.5 rounded mb-1">1392년 초</span>
+                            <div class="font-bold text-gray-800 my-1">
+                                <span class="blank-box min-w-[70px]"><span class="blank-num">②</span><span class="answer-text hidden">온건파</span></span> 사대부 제거
+                            </div>
+                            <div class="text-[10px] text-gray-500">정몽주 등 신진 세력 정리</div>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-lg border border-blue-200 shadow-sm flex flex-col justify-between">
+                            <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-1.5 py-0.5 rounded mb-1">1392년</span>
+                            <div class="font-bold text-emerald-700">조선 건국</div>
+                            <div class="text-[10px] text-gray-500 mt-1">태조 이성계 즉위</div>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-lg border border-blue-200 shadow-sm flex flex-col justify-between">
+                            <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-1.5 py-0.5 rounded mb-1">1394년</span>
+                            <div class="font-bold text-blue-900 my-1">
+                                <span class="blank-box min-w-[70px]"><span class="blank-num">③</span><span class="answer-text hidden">한양</span></span> 천도
+                            </div>
+                            <div class="text-[10px] text-gray-500">지리·교통·방어 요충지</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept Note Block -->
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <div class="font-bold text-slate-800 mb-1"><i class="fa-solid fa-users text-blue-600"></i> 건국 주도 세력</div>
+                        <p class="text-gray-700 leading-relaxed">
+                            신흥 무인 세력(이성계) + 
+                            <span class="blank-box min-w-[80px]"><span class="blank-num">④</span><span class="answer-text hidden">급진파</span></span> 사대부(정도전 등 고려 왕조 교체 주장)
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <div class="font-bold text-slate-800 mb-1"><i class="fa-solid fa-book-quran text-blue-600"></i> 통치 이념</div>
+                        <p class="text-gray-700 leading-relaxed">
+                            <span class="blank-box min-w-[80px]"><span class="blank-num">⑤</span><span class="answer-text hidden">성리학</span></span>을 통치 이념으로 삼아 민본 정치와 유교적 질서를 구현함.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: 국왕별 국가 기틀 확립 -->
+            <div class="mb-4">
+                <h2 class="text-base font-bold text-gray-900 mb-2.5 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-black">2</span>
+                    국가 기틀의 확립 (초기 국왕들의 업적 비교)
+                </h2>
+
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <!-- 태종 Card -->
+                    <div class="border-2 border-amber-200 bg-amber-50/40 rounded-xl p-3">
+                        <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-amber-200">
+                            <span class="font-black text-amber-900 text-xs">태종 <span class="font-normal text-amber-700">(왕권 강화)</span></span>
+                            <span class="bg-amber-200 text-amber-900 font-extrabold text-[10px] px-2 py-0.5 rounded-full">6조 직계제</span>
+                        </div>
+                        <ul class="text-xs space-y-1.5 text-gray-700">
+                            <li>• 공신과 왕자들의 <span class="blank-box min-w-[80px]"><span class="blank-num">⑥</span><span class="answer-text hidden">사병</span></span> 혁파 ➔ 군사권 장악</li>
+                            <li>• 양전 사업 및 <span class="blank-box min-w-[80px]"><span class="blank-num">⑦</span><span class="answer-text hidden">호패법</span></span> 실시 (조세·군역 확보)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 세종 Card -->
+                    <div class="border-2 border-emerald-200 bg-emerald-50/40 rounded-xl p-3">
+                        <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-emerald-200">
+                            <span class="font-black text-emerald-900 text-xs">세종 <span class="font-normal text-emerald-700">(유교 정치·왕권과 신권 조화)</span></span>
+                            <span class="bg-emerald-200 text-emerald-900 font-extrabold text-[10px] px-2 py-0.5 rounded-full">의정부 서사제</span>
+                        </div>
+                        <ul class="text-xs space-y-1.5 text-gray-700">
+                            <li>• 학문 연구 기관인 <span class="blank-box min-w-[80px]"><span class="blank-num">⑧</span><span class="answer-text hidden">집현전</span></span> 설치, 경연 활성화</li>
+                            <li>• <span class="blank-box min-w-[90px]"><span class="blank-num">⑨</span><span class="answer-text hidden">훈민정음</span></span> 창제 및 4군 6진 개척</li>
+                        </ul>
+                    </div>
+
+                    <!-- 세조 Card -->
+                    <div class="border-2 border-rose-200 bg-rose-50/40 rounded-xl p-3">
+                        <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-rose-200">
+                            <span class="font-black text-rose-900 text-xs">세조 <span class="font-normal text-rose-700">(왕권 재강화)</span></span>
+                            <span class="bg-rose-200 text-rose-900 font-extrabold text-[10px] px-2 py-0.5 rounded-full">6조 직계제 부활</span>
+                        </div>
+                        <ul class="text-xs space-y-1.5 text-gray-700">
+                            <li>• 집현전 폐지, 경연 중단 (신권 약화)</li>
+                            <li>• 현직 관리에게만 수조권 지급하는 <span class="blank-box min-w-[80px]"><span class="blank-num">⑩</span><span class="answer-text hidden">직전법</span></span> 시행</li>
+                        </ul>
+                    </div>
+
+                    <!-- 성종 Card -->
+                    <div class="border-2 border-indigo-200 bg-indigo-50/40 rounded-xl p-3">
+                        <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-indigo-200">
+                            <span class="font-black text-indigo-900 text-xs">성종 <span class="font-normal text-indigo-700">(통치 체제 완성)</span></span>
+                            <span class="bg-indigo-200 text-indigo-900 font-extrabold text-[10px] px-2 py-0.5 rounded-full">의정부 서사제 복구</span>
+                        </div>
+                        <ul class="text-xs space-y-1.5 text-gray-700">
+                            <li>• 집현전 계승한 <span class="blank-box min-w-[80px]"><span class="blank-num">⑪</span><span class="answer-text hidden">홍문관</span></span> 설치, 경연 재개</li>
+                            <li>• 조선 기본 법전 『<span class="blank-box min-w-[90px]"><span class="blank-num">⑫</span><span class="answer-text hidden">경국대전</span></span>』 완성 및 반포</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Term Explanations Box: 6조 직계제 vs 의정부 서사제 -->
+                <div class="bg-blue-900 text-white p-3 rounded-xl text-xs space-y-2 shadow-sm">
+                    <div class="font-bold text-amber-300 flex items-center gap-1">
+                        <i class="fa-solid fa-book-open"></i> [필수 개념 정리] 정치 운영 방식의 비교
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] leading-snug">
+                        <div class="bg-blue-950/60 p-2 rounded-lg border border-blue-700">
+                            <span class="font-bold text-amber-200">📌 6조 직계제 (六條 直啓制) :</span><br>
+                            6조에서 국왕에게 국정 업무를 <b>직접 보고</b>하고, 국왕이 직접 지시하여 집행하는 제도. 의정부의 권한이 약화되고 <b>왕권이 크게 강화</b>됨. (태종, 세조)
+                        </div>
+                        <div class="bg-blue-950/60 p-2 rounded-lg border border-blue-700">
+                            <span class="font-bold text-emerald-200">📌 의정부 서사제 (議政府 署事制) :</span><br>
+                            6조의 안건을 의정부 재상들이 <b>심의·합의</b>한 후 국왕에게 보고하여 결재받는 제도. <b>왕권과 신권(재상권)의 조화</b>를 이룸. (세종, 성종)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 보기 (Word Bank) Bottom -->
+        <div class="bg-gray-100 border-2 border-dashed border-gray-300 p-2 rounded-xl text-center">
+            <span class="bg-gray-800 text-white font-bold text-[10px] px-2 py-0.5 rounded mr-2">보기</span>
+            <span class="text-xs font-semibold text-gray-700 space-x-2">
+                한양 | 과전법 | 온건파 | 성리학 | 급진파 | 사병 | 호패법 | 집현전 | 훈민정음 | 직전법 | 홍문관 | 경국대전
+            </span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: 통치 제도의 정비 & 경복궁 탐구 -->
+    <div class="a4-page rounded-lg flex flex-col justify-between">
+        <div>
+            <!-- Section Title -->
+            <div class="border-b-2 border-blue-900 pb-2 mb-4 flex justify-between items-center">
+                <h2 class="text-base font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-black">3</span>
+                    조선의 통치 제도 정비 (중앙 · 지방 · 사회)
+                </h2>
+                <span class="text-xs font-bold text-gray-500">2 PAGE / 3 PAGE</span>
+            </div>
+
+            <!-- Central Political Diagram -->
+            <div class="mb-5">
+                <div class="text-xs font-bold text-blue-900 mb-2 flex items-center gap-1">
+                    <i class="fa-solid fa-sitemap"></i> 중앙 정치 기구 구조도
+                </div>
+
+                <div class="border border-gray-300 rounded-xl overflow-hidden text-xs">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-blue-900 text-white font-bold">
+                            <tr>
+                                <th class="p-2 w-1/4 border-r border-blue-800 text-center">기구명</th>
+                                <th class="p-2 border-r border-blue-800">주요 역할 및 특징</th>
+                                <th class="p-2 w-1/4 text-center">비고</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-gray-50 border-r">의정부</td>
+                                <td class="p-2 border-r">3정승(영의정, 좌의정, 우의정)이 합의하여 국정을 총괄함.</td>
+                                <td class="p-2 text-center text-gray-500">최고 정책 심의 기구</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-gray-50 border-r">6조</td>
+                                <td class="p-2 border-r">이조, 호조, 예조, 병조, 형조, 공조 ➔ 주요 행정 실무 담당</td>
+                                <td class="p-2 text-center text-gray-500">행정 집행 기구</td>
+                            </tr>
+                            <tr class="bg-amber-50/50">
+                                <td class="p-2 font-bold text-center text-amber-900 border-r">3사 (언론 기구)</td>
+                                <td class="p-2 border-r">
+                                    • 사헌부: 관리 비리 감찰<br>
+                                    • 사간원: 국왕의 정치 간언<br>
+                                    • <span class="blank-box min-w-[90px]"><span class="blank-num">①</span><span class="answer-text hidden">홍문관</span></span>: 왕의 자문 및 경연 담당
+                                </td>
+                                <td class="p-2 text-center text-amber-900 font-bold">권력 독점 및 남용 방지 (언관)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-gray-50 border-r">승정원 / 의금부</td>
+                                <td class="p-2 border-r">
+                                    • 승정원: 국왕의 비서 기관(왕명 전달)<br>
+                                    • 의금부: 국가의 중대 죄인을 다스림
+                                </td>
+                                <td class="p-2 text-center text-blue-700 font-bold">
+                                    <span class="blank-box min-w-[70px]"><span class="blank-num">②</span><span class="answer-text hidden">왕권</span></span> 강화 뒷받침
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-gray-50 border-r">기타 기구</td>
+                                <td class="p-2 border-r">춘추관(역사 편찬), 성균관(최고 교육), 한성부(수도 행정·치안)</td>
+                                <td class="p-2 text-center text-gray-500">전문 행정기구</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Local, Military, Exam grid -->
+            <div class="grid grid-cols-2 gap-3 mb-5 text-xs">
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <div class="font-bold text-blue-900 mb-1.5 flex items-center gap-1">
+                        <i class="fa-solid fa-map-location-dot"></i> 지방 행정 제도
+                    </div>
+                    <ul class="space-y-1.5 text-gray-700">
+                        <li>• 전국을 <span class="blank-box min-w-[70px]"><span class="blank-num">③</span><span class="answer-text hidden">8도</span></span>로 나누고 <span class="blank-box min-w-[80px]"><span class="blank-num">④</span><span class="answer-text hidden">관찰사</span></span>를 파견함.</li>
+                        <li>• 모든 부·목·군·현에 <span class="blank-box min-w-[70px]"><span class="blank-num">⑤</span><span class="answer-text hidden">수령</span></span> 파견 ➔ 고려와 달리 속현 소멸 (중앙집권 강화).</li>
+                        <li>• 수령 보좌 향리 통제 및 유향소 설치.</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <div class="font-bold text-blue-900 mb-1.5 flex items-center gap-1">
+                        <i class="fa-solid fa-graduation-cap"></i> 관리 등용 & 군사/교통
+                    </div>
+                    <ul class="space-y-1.5 text-gray-700">
+                        <li>• <b>관리 등용:</b> <span class="blank-box min-w-[70px]"><span class="blank-num">⑥</span><span class="answer-text hidden">과거</span></span>(문과, 무과, 잡과) 위주, 음서 범위 축소.</li>
+                        <li>• <b>교육 기관:</b> 서당 ➔ 향교/4부학당 ➔ 성균관</li>
+                        <li>• <b>군사·교통:</b> 중앙군(5위), 지방군 / <span class="blank-box min-w-[80px]"><span class="blank-num">⑦</span><span class="answer-text hidden">봉수제</span></span>, 역참·원 설치.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 4: [탐구 활동 1] 경복궁의 의미와 각 건물의 쓰임새 -->
+            <div class="border-2 border-indigo-200 bg-indigo-50/30 p-3.5 rounded-xl">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-indigo-950 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-vihara text-indigo-700"></i> [탐구 활동 1] 경복궁의 주요 건물에 담긴 유교적 의미와 역할
+                    </h3>
+                    <span class="text-[10px] bg-indigo-200 text-indigo-900 font-extrabold px-2 py-0.5 rounded">교과서 연계</span>
+                </div>
+                <p class="text-[11px] text-gray-600 mb-2.5">
+                    조선의 으뜸 궁궐인 <b>경복궁(景福宮)</b>의 이름은 "큰 복을 누리라"는 뜻입니다. 주요 건물의 이름과 쓰임새를 연결해 봅시다.
+                </p>
+
+                <div class="bg-white rounded-lg border border-indigo-200 overflow-hidden text-xs">
+                    <table class="w-full text-left">
+                        <thead class="bg-indigo-900 text-white font-bold">
+                            <tr>
+                                <th class="p-2 w-1/5 text-center">건물명</th>
+                                <th class="p-2 w-2/5">이름에 담긴 뜻</th>
+                                <th class="p-2 w-2/5">쓰임새 (역할)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-indigo-100">
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-indigo-50/50">근정전 (勤政殿)</td>
+                                <td class="p-2">부지런하게 정치를 펼치라.</td>
+                                <td class="p-2">왕의 즉위식, 신년 하례, <span class="blank-box min-w-[80px]"><span class="blank-num">⑧</span><span class="answer-text hidden">과거 시험</span></span> 등 주요 의식</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-indigo-50/50">사정전 (思政殿)</td>
+                                <td class="p-2">깊이 생각한 후 정사를 펼치라.</td>
+                                <td class="p-2">왕의 평소 집무실 (왕과 신하들이 국정을 논의함)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-indigo-50/50">강녕전 (康寧殿)</td>
+                                <td class="p-2">오복 중 하나인 강녕을 누리라.</td>
+                                <td class="p-2"><span class="blank-box min-w-[90px]"><span class="blank-num">⑨</span><span class="answer-text hidden">국왕의 침전</span></span> (개인 일상 공간)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-indigo-50/50">교태전 (交泰殿)</td>
+                                <td class="p-2">천지, 음양이 조화를 이루어 태평하라.</td>
+                                <td class="p-2"><span class="blank-box min-w-[90px]"><span class="blank-num">⑩</span><span class="answer-text hidden">왕비의 침전</span></span> (중궁전)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold text-center bg-indigo-50/50">경회루 (慶會樓)</td>
+                                <td class="p-2">임금과 신하가 덕으로써 만난다.</td>
+                                <td class="p-2">국가 경사시 연회 개최 및 <span class="blank-box min-w-[100px]"><span class="blank-num">⑪</span><span class="answer-text hidden">외국 사신 접대</span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-[11px] text-gray-400 border-t pt-2">
+            조선시대 통치 체제는 유교적 통치 이념을 바탕으로 경국대전을 통해 법치주의로 완성되었습니다.
+        </div>
+    </div>
+
+    <!-- PAGE 3: 대외 관계 정비 & 단어 암호판 미션 -->
+    <div class="a4-page rounded-lg flex flex-col justify-between">
+        <div>
+            <!-- Section Title -->
+            <div class="border-b-2 border-blue-900 pb-2 mb-4 flex justify-between items-center">
+                <h2 class="text-base font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-black">4</span>
+                    대외 관계 정비 및 종합 탐구 활동
+                </h2>
+                <span class="text-xs font-bold text-gray-500">3 PAGE / 3 PAGE</span>
+            </div>
+
+            <!-- SECTION 5: 대외 관계 (사대교린) -->
+            <div class="mb-5">
+                <h3 class="text-xs font-bold text-blue-900 mb-2 flex items-center gap-1">
+                    <i class="fa-solid fa-earth-asia"></i> 조선 초기의 대외 관계: 사대교린(事大交隣) 정책
+                </h3>
+
+                <div class="grid grid-cols-2 gap-3 text-xs mb-2">
+                    <!-- 사대 정책 -->
+                    <div class="bg-blue-50/60 border border-blue-200 p-3 rounded-xl">
+                        <div class="font-extrabold text-blue-900 mb-1 flex items-center justify-between">
+                            <span>명과의 관계 : <span class="blank-box min-w-[70px]"><span class="blank-num">①</span><span class="answer-text hidden">사대</span></span> 정책</span>
+                            <span class="bg-blue-200 text-blue-900 font-bold px-1.5 py-0.5 rounded text-[10px]">실리적 외교</span>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            • 명에 정기적으로 사절단을 파견하여 조공을 바치고 책봉을 받음.<br>
+                            • 선진 문물 수용 및 정권의 안정 도모 (실리 추구).
+                        </p>
+                    </div>
+
+                    <!-- 교린 정책 -->
+                    <div class="bg-amber-50/60 border border-amber-200 p-3 rounded-xl">
+                        <div class="font-extrabold text-amber-900 mb-1 flex items-center justify-between">
+                            <span>여진·일본과의 관계 : <span class="blank-box min-w-[70px]"><span class="blank-num">②</span><span class="answer-text hidden">교린</span></span> 정책</span>
+                            <span class="bg-amber-200 text-amber-900 font-bold px-1.5 py-0.5 rounded text-[10px]">강온 양면 책</span>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            • <b>여진:</b> 세종 때 최윤덕·김종서 ➔ <span class="blank-box min-w-[80px]"><span class="blank-num">③</span><span class="answer-text hidden">4군 6진</span></span> 개척 (압록강·두만강 국경 확정)<br>
+                            • <b>일본:</b> 쓰시마섬 정벌 vs <span class="blank-box min-w-[80px]"><span class="blank-num">④</span><span class="answer-text hidden">3포 개항</span></span> (부산포·염포·제포)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Term Explanations for Foreign Relations -->
+                <div class="bg-slate-100 p-2.5 rounded-lg border border-slate-300 text-[11px] text-gray-700 flex gap-4">
+                    <div><b>💡 사대(事大):</b> 큰 나라를 섬김 (명나라와의 평화 유지 및 선진 문물 수용 목적)</div>
+                    <div><b>💡 교린(交隣):</b> 이웃 나라와 교류함 (여진·일본에 대한 유화책과 강경책 병행)</div>
+                </div>
+            </div>
+
+            <!-- SECTION 6: [탐구 활동 2] 통치 체제 단어 암호판 미션 -->
+            <div class="border-2 border-slate-300 bg-slate-50 p-3.5 rounded-xl mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-slate-900 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-puzzle-piece text-blue-600"></i> [탐구 활동 2] 암호 찾기 활동으로 조선 통치 체제 완성하기
+                    </h3>
+                    <span class="text-[10px] bg-slate-200 text-slate-800 font-bold px-2 py-0.5 rounded">모둠 & 개인 미션</span>
+                </div>
+                <p class="text-[11px] text-gray-600 mb-2.5">
+                    [미션] 아래 암호판에서 조선의 통치 제도 및 역사 용어 <b>8개 이상</b>을 찾아 표시하고, 문장을 완성해 봅시다!
+                </p>
+
+                <!-- Grid & Sentence Layout -->
+                <div class="flex gap-4 items-start">
+                    <!-- Word Grid Table -->
+                    <div class="bg-white p-2 rounded-lg border border-slate-300 shadow-sm">
+                        <table class="word-grid border-collapse select-none">
+                            <tbody>
+                                <tr><td>성</td><td>균</td><td>관</td><td>교</td><td>정</td><td>도</td><td>감</td><td>의</td><td>비</td><td>유</td></tr>
+                                <tr><td>기</td><td>인</td><td>제</td><td>도</td><td>의</td><td>정</td><td>부</td><td>금</td><td>변</td><td>향</td></tr>
+                                <tr><td>사</td><td>한</td><td>성</td><td>부</td><td>고</td><td>려</td><td>과</td><td>부</td><td>사</td><td>소</td></tr>
+                                <tr><td>강</td><td>천</td><td>거</td><td>승</td><td>정</td><td>원</td><td>거</td><td>홍</td><td>문</td><td>관</td></tr>
+                                <tr><td>원</td><td>사</td><td>헌</td><td>부</td><td>춘</td><td>병</td><td>마</td><td>절</td><td>도</td><td>사</td></tr>
+                                <tr><td>경</td><td>국</td><td>대</td><td>전</td><td>추</td><td>관</td><td>찰</td><td>사</td><td>중</td><td>방</td></tr>
+                                <tr><td>음</td><td>서</td><td>제</td><td>도</td><td>관</td><td>사</td><td>심</td><td>관</td><td>제</td><td>도</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sentence Completion -->
+                    <div class="flex-1 text-xs space-y-2">
+                        <div class="font-bold text-blue-900 mb-1"><i class="fa-solid fa-pen-to-square"></i> 찾은 단어로 설명 문장 만들기:</div>
+
+                        <div class="bg-white p-2 rounded border border-gray-200">
+                            <span class="font-bold text-blue-800">[의정부]</span> 국왕을 보좌하여 국정을 심의·결정하였다.
+                        </div>
+
+                        <div class="bg-white p-2 rounded border border-gray-200 flex items-center gap-1">
+                            <span class="font-bold text-blue-800">[ ① <span class="blank-box min-w-[70px]"><span class="answer-text hidden">홍문관</span></span> ]</span> 궁중 서적 관리 및 국왕 자문, 경연 담당.
+                        </div>
+
+                        <div class="bg-white p-2 rounded border border-gray-200 flex items-center gap-1">
+                            <span class="font-bold text-blue-800">[ ② <span class="blank-box min-w-[70px]"><span class="answer-text hidden">승정원</span></span> ]</span> 국왕 비서 기관으로 왕명 전달 담당.
+                        </div>
+
+                        <div class="bg-white p-2 rounded border border-gray-200 flex items-center gap-1">
+                            <span class="font-bold text-blue-800">[ ③ <span class="blank-box min-w-[70px]"><span class="answer-text hidden">경국대전</span></span> ]</span> 성종 때 완성된 조선의 기본 통치 법전.
+                        </div>
+
+                        <div class="bg-white p-2 rounded border border-gray-200 flex items-center gap-1">
+                            <span class="font-bold text-blue-800">[ ④ <span class="blank-box min-w-[70px]"><span class="answer-text hidden">관찰사</span></span> ]</span> 8도에 파견되어 수령을 감찰하는 최고 지방관.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self Reflection Section -->
+            <div class="bg-blue-50/50 border border-blue-200 p-2.5 rounded-xl text-xs">
+                <div class="font-bold text-blue-950 mb-1.5 flex items-center justify-between">
+                    <span><i class="fa-solid fa-star text-amber-500"></i> 나의 학습 성찰 & 피드백</span>
+                    <span class="text-gray-400 font-normal">스스로 점검해 보세요</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-center text-gray-700">
+                    <label class="bg-white p-1.5 rounded border flex items-center justify-center gap-1 cursor-pointer">
+                        <input type="checkbox" class="accent-blue-600"> 조선 건국 과정 이해
+                    </label>
+                    <label class="bg-white p-1.5 rounded border flex items-center justify-center gap-1 cursor-pointer">
+                        <input type="checkbox" class="accent-blue-600"> 통치 기구 역할 구분
+                    </label>
+                    <label class="bg-white p-1.5 rounded border flex items-center justify-center gap-1 cursor-pointer">
+                        <input type="checkbox" class="accent-blue-600"> 경복궁 유교적 의미 파악
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-between items-center text-[11px] text-gray-400 border-t pt-2">
+            <span>중학교 역사 ② - Ⅳ - 1. 통치 체제와 대외 정비</span>
+            <span>수업일자: 20  .   .   .</span>
+        </div>
+    </div>
+
+    <!-- Script for Interactive Features -->
+    <script>
+        // Toggle Answer Display
+        let showAnswer = false;
+        function toggleAnswers() {
+            showAnswer = !showAnswer;
+            const answers = document.querySelectorAll('.answer-text');
+            const btnText = document.getElementById('ansBtnText');
+
+            answers.forEach(ans => {
+                if (showAnswer) {
+                    ans.classList.remove('hidden');
+                } else {
+                    ans.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = showAnswer ? "정답 숨기기" : "정답 보기";
+        }
+
+        // Interactive Word Search Highlight
+        document.querySelectorAll('.word-grid td').forEach(td => {
+            td.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html>
+```eof
+
+### ✏️ 수정된 사항 안내
+1. **단원 제목 수정**: 모든 페이지에서 `Ⅳ - 1. 통치 체제와 대외 정비`로 통일 및 깔끔하게 정리했습니다.
+2. **학생 정보 입력란 수정**: 회색 안내 문구(`3학년 반`, `번`, `이름 입력`)를 모두 삭제하고 인쇄 시 바로 적을 수 있도록 실선 표기하였습니다.
+3. **건국 순서 제목 수정**: `(순서대로 연결하기)` 문구를 삭제하였습니다.
+4. **빈칸 넓이 및 괄호 번호 크기 조절**:
+   - 괄호 번호(`①`, `②` 등)의 크기를 자그마하고 정갈하게 줄였습니다.
+   - 학생들이 손으로 직접 쓰기에 충분하도록 모든 빈칸의 밑줄 공간(폭)을 넓게 확보했습니다.
+5. **개념 설명 추가 (6조 직계제 / 의정부 서사제 등)**:
+   - 1쪽 하단에 **6조 직계제**(국왕의 직접 보고·지시, 왕권 강화)와 **의정부 서사제**(의정부 재상들의 심의·합의, 왕권과 신권의 조화)의 상세 설명을 담은 [필수 개념 정리] 상자를 추가했습니다.
+   - 3쪽 상단에 **사대(事大)** 및 **교린(交隣)**의 개념 설명도 추가하였습니다.
